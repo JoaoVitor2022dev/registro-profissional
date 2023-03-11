@@ -1,12 +1,9 @@
-//    lendo dados 
+//         ultilzando o WHERE 
 
-// para le dados de uma tabela vamos ultilizar o metodo fetchall; 
 
-// que tambem requer o model, no nosso caso o User; 
+// para filtrar dados com sequelize ultizando o where , precisamos inserir um novo parametro; 
 
-// os dados vem em um objeto especial, para trasnformar em um array de objetos temos que inserir um parametro; 
+// que será o where, um objeto onde colocamos a propriedades e valores que querem os filtrar; 
 
-// que é raw como true; 
-
-// vamos ver na pratica!
+// e para retornar apenas um resultado podemos ultilzar o metodo FindOne; 
 

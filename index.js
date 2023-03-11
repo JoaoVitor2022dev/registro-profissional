@@ -51,6 +51,22 @@ app.post('/users/create', async ( req , res) => {
 
 });
 
+// rota para usaurio com id
+
+app.get("/users/:id", async (req , res) => {
+   
+  const id  = req.params.id; 
+
+  const user = await User.findOne({ raw: true, where: {id: id }});
+
+  // redicerionar para a url 
+ 
+  res.render("userview", {  user });
+
+});
+
+
+
 app.get('/', async (req, res) => {
   
   const users = await User.findAll({ raw: true });
@@ -59,6 +75,8 @@ app.get('/', async (req, res) => {
    
   res.render('home', { users }); 
 });
+
+
 
 // conection...
 conn
