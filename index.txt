@@ -1,0 +1,12 @@
+//    lendo dados 
+
+// para le dados de uma tabela vamos ultilizar o metodo fetchall; 
+
+// que tambem requer o model, no nosso caso o User; 
+
+// os dados vem em um objeto especial, para trasnformar em um array de objetos temos que inserir um parametro; 
+
+// que é raw como true; 
+
+// vamos ver na pratica!
+
