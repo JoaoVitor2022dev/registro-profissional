@@ -7,7 +7,7 @@ const User = require('./models/User');
 
 const app = express()
 
-app.engine('handlebars', exphbs.engine())
+app.engine('handlebars', exphbs.engine());
 app.set('view engine', 'handlebars')
 
 app.use(
@@ -66,7 +66,6 @@ app.get("/users/:id", async (req , res) => {
 });
 
 
-
 app.get('/', async (req, res) => {
   
   const users = await User.findAll({ raw: true });
@@ -77,6 +76,17 @@ app.get('/', async (req, res) => {
 });
 
 
+// rota de delletar... 
+
+app.post('/users/delete/:id', async ( req , res ) => {
+   
+  const id = req.params.id; 
+  
+  await User.destroy({ where: { id: id } }); 
+
+  res.redirect('/');
+
+});
 
 // conection...
 conn
