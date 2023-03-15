@@ -4,6 +4,7 @@ const conn = require('./db/conn');
 // conecçao de models 
 
 const User = require('./models/User');
+const Adress = require('./models/Address');
 
 const app = express()
 
@@ -129,10 +130,42 @@ app.post("/users/update", async( req , res ) => {
 });
 
 
+// rota de adicioanr endereço 
+
+app.post('/adreess/create' , async(  req , res ) => { 
+
+  // dados que vem do requisiçao do bady 
+
+  const UserId = req.body.UserId; 
+  const street = req.body.street;
+  const number = req.body.number;
+  const city = req.body.city;
+   
+
+  // facilitar os dados enviados para o banco, fazendo um objeto...
+
+  const address = { 
+    UserId, 
+    street,
+    number,
+    city
+  };  
+
+  // a comunicaçao com o mysql comcomando de sequilize 
+
+  await Adress.create(address);
+
+  res.redirect(`/users/edit/${UserId}`);
+
+}); 
+
+
+
+
 // conection...
 conn
-  .sync()
-  // .sync({ force: true })
+   .sync()
+  //.sync({ force: true })
   .then(() => {
    app.listen(5000, () => {
       console.log('servidor rodando...');
