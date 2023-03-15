@@ -19,3 +19,22 @@
   </div>
   <input type="submit" value="Editar">
 </form>
+<div class="adreess-container">
+   <h2>Endereço: </h2>
+   <form action="/adreess/create" method="POST">
+      <input type="hidden" name="UserId" value="{{user.id}}">
+         <div class="form-control">
+          <label for="street">Rua:</label>
+          <input type="text" name="street" placeholder="Digite a sua rua">
+         </div>
+         <div class="form-control">
+          <label for="number">Numero:</label>
+          <input type="text" name="number" placeholder="Digite o numero da sua residencia">
+         </div>
+         <div class="form-control">
+          <label for="city">Cidade:</label>
+          <input type="text" name="city" placeholder="Digite o nome da sua cidade">
+         </div>
+         <input type="submit" value="Incluir endereço">
+   </form>
+</div>
