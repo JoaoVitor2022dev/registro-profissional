@@ -88,9 +88,51 @@ app.post('/users/delete/:id', async ( req , res ) => {
 
 });
 
+
+// rota de edite 
+
+
+app.get('/users/edit/:id', async ( req , res ) => {
+   
+  const id = req.params.id; 
+  
+   const user = await User.findOne({ raw: true , where: { id: id } }); 
+
+  res.render('useredit', { user } );
+
+});
+
+app.post("/users/update", async( req , res ) => {
+  
+  const id = req.body.id; 
+  const name = req.body.name; 
+  const accupation = req.body.accupation;
+  let newsletter = req.body.newsletter;
+
+  if (newsletter === "on") {
+     newsletter = true; 
+  } else {
+    newsletter = false;
+  }
+
+  const userData = {
+    id,
+    name,
+    accupation, 
+    newsletter 
+  };
+ 
+  await User.update(userData, { where: { id : id} }); 
+ 
+  res.redirect("/");
+
+});
+
+
 // conection...
 conn
   .sync()
+  // .sync({ force: true })
   .then(() => {
    app.listen(5000, () => {
       console.log('servidor rodando...');
