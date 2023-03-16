@@ -38,3 +38,16 @@
          <input type="submit" value="Incluir endereço">
    </form>
 </div>
+ <div class="list">
+    <h2>Lista de Endereço</h2>
+     {{#each user.Adresses}}
+       <div>
+        <p>#{{this.id}} - {{this.street}} - {{this.number}} - {{ this.city }}</p>
+        <form action="/adreess/delete" method="POST">
+          <input type="hidden" name="UserId" value="{{this.UserId}}">
+          <input type="hidden" name="id" value="{{this.id}}">
+          <input type="submit" value="Excluir">
+        </form>
+       </div>
+     {{/each}}
+</div>
