@@ -21,7 +21,8 @@ const Adress = db.define('Adress', {
 }); 
 
 // relacionamento 
-
+User.hasMany(Adress);
 Adress.belongsTo(User);
+
 
 module.exports = Adress;
