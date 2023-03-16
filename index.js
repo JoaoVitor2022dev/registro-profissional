@@ -17,7 +17,8 @@ app.use(
   }),
 )
 
-app.use(express.json())
+// forma de comunicaçao = JSON
+app.use(express.json());
 
 app.use(express.static('public'))
 
@@ -89,17 +90,20 @@ app.post('/users/delete/:id', async ( req , res ) => {
 
 });
 
-
 // rota de edite 
-
 
 app.get('/users/edit/:id', async ( req , res ) => {
    
   const id = req.params.id; 
-  
-   const user = await User.findOne({ raw: true , where: { id: id } }); 
 
-  res.render('useredit', { user } );
+  try {
+   const user = await User.findOne({ include: Adress, where: { id: id } }); 
+
+   res.render('useredit', { user: user.get({ plain: true })});
+
+  } catch (error) {
+    console.log(error);
+  }
 
 });
 
@@ -159,6 +163,21 @@ app.post('/adreess/create' , async(  req , res ) => {
 
 }); 
 
+
+// rota para remover os relacionados...
+
+app.post('/adreess/delete', async(req , res) => { 
+  // id para poder redirecionar para a page edit do tal ususario...
+  const id = req.body.id; 
+  
+  // o User id para poder apagar o dado desse tal userid do ususario
+  const UserId = req.body.UserId;  
+   
+  await Adress.destroy({ where: { id: id },}); 
+ 
+  res.redirect(`/users/edit/${UserId}`);
+
+}); 
 
 
 
